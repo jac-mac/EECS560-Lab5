@@ -1,9 +1,11 @@
 #include "Hash.h"
 
-Hash::Hash()
+Hash::Hash(int newSize)
 {
+  size = newSize;
   arr = new int[size];
   b_arr = new bool[size];
+
 
   for(int i = 0; i < size; i++)
   {
@@ -68,6 +70,15 @@ void Hash::InsertDouble(int input)
         break;
       }
     }
+  }
+}
+
+bool Hash::SearchQuad(int input)
+{
+  bool foundInput = false;
+  if(arr[HashFunction(input)] != input && arr[HashFunction(input)] != -1)
+  {
+
   }
 }
 

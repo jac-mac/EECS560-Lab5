@@ -5,17 +5,18 @@ class Hash
 {
   private:
   int* arr;
-  int size = 1000003; //1,000,003
+  int size;
   bool* b_arr;
 
   public:
-  Hash();
+  Hash(int newSize);
   ~Hash();
 
   int HashFunction(int input);
   int HashFunction2(int input);
   void InsertQuad(int input);
   void InsertDouble(int input);
+  bool SearchQuad(int input);
   bool HasOccupied(int input);
 
 };

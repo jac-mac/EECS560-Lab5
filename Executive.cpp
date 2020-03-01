@@ -2,12 +2,14 @@
 
 Executive::Executive()
 {
-  hashTable = new Hash;
+  hashSize = 1000003;
+  hashTableQ = new Hash(hashSize);
+  hashTableD = new Hash(hashSize);
 }
 
 void Executive::Run()
 {
-  srand(time(NULL));
+
 }
 
 void Executive::PrintMenu()
@@ -43,4 +45,26 @@ void Executive::WrongInputTypeCheck(int &num)
       else
         break;
     }
+}
+
+void Executive::InitializeHash(double multiplier)
+{
+  srand(time(NULL));
+  std::cout << "Inserting " << floor(multiplier*hashSize) << " random numbers into hash table using quadratic probing...\n";
+  int randomNumber;
+  clock_t begin, end;
+
+  int a[hashSize];
+  begin = clock();
+  for(int i = 0; i < floor(multiplier*hashSize); i++)
+  {
+    randomNumber = rand() % 5000000 + 1; //1-5,000,000
+    hashTableQ->InsertQuad(randomNumber);
+  }
+  end = clock();
+  std::cout << "\n\nDONE\n";
+
+  double time_interval = double(end-begin)/CLOCKS_PER_SEC;
+
+  std::cout << "Inserting " << floor(multiplier*hashSize) << " random numbers into hash table";
 }
