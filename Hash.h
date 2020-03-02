@@ -17,6 +17,7 @@ class Hash
   void InsertQuad(int input);
   void InsertDouble(int input);
   bool SearchQuad(int input);
+  bool SearchDouble(int input);
   bool HasOccupied(int input);
 
 };

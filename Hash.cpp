@@ -33,53 +33,60 @@ int Hash::HashFunction2(int input)
 
 void Hash::InsertQuad(int input)
 {
-  bool foundEmpty = false;
-  if(arr[HashFunction(input)] == -1)
-  {
-    arr[HashFunction(input)] = input;
-  }
-  else
-  {
     for(int i = 0; i < 25; i++)
     {
-      if(arr[HashFunction(input)+(i*i)] == -1)
+      if(arr[(HashFunction(input)+(i*i)) % size] == -1)
       {
-        arr[HashFunction(input)+(i*i)] = input;
-        foundEmpty = true;
+        arr[(HashFunction(input)+(i*i)) % size] = input;
         break;
       }
+      b_arr[(HashFunction(input)+(i*i)) % size] = 1;
     }
-  }
 }
 
 void Hash::InsertDouble(int input)
 {
-  bool foundEmpty = false;
-  if(arr[HashFunction(input)] == -1)
-  {
-    arr[HashFunction(input)] = input;
-  }
-  else
-  {
     for(int i = 0; i < 25; i++)
     {
-      if(arr[HashFunction(input)+(i*(HashFunction2(input)))] == -1)
+      if(arr[(HashFunction(input)+(i*(HashFunction2(input)))) % size] == -1)
       {
-        arr[HashFunction(input)+(i*(HashFunction2(input)))] = input;
-        foundEmpty = true;
+        arr[(HashFunction(input)+(i*(HashFunction2(input)))) % size] = input;
         break;
       }
+      b_arr[(HashFunction(input)+(i*(HashFunction2(input)))) % size] = 1;
     }
-  }
 }
 
 bool Hash::SearchQuad(int input)
 {
-  bool foundInput = false;
-  if(arr[HashFunction(input)] != input && arr[HashFunction(input)] != -1)
-  {
+    for(int i = 0; i < 25; i++)
+    {
+      if(arr[(HashFunction(input)+(i*i)) % size] == input)
+      {
+        return true;
+      }
+      else if(b_arr[(HashFunction(input)+(i*i)) % size] == 0 && arr[HashFunction(HashFunction(input)+(i*i))] != input)
+      {
+        return false;
+      }
+    }
+    return false;
+}
 
-  }
+bool Hash::SearchDouble(int input)
+{
+    for(int i = 0; i < 25; i++)
+    {
+      if(arr[(HashFunction(input)+(i*(HashFunction2(input)))) % size] == input)
+      {
+        return true;
+      }
+      else if(b_arr[(HashFunction(input)+(i*(HashFunction2(input)))) % size] == 0)
+      {
+        return false;
+      }
+    }
+    return false;
 }
 
 bool Hash::HasOccupied(int input)

@@ -14,15 +14,26 @@ using namespace std;
 class Executive
 {
   private:
+  int hashSize = 1000003;
   Hash* hashTableQ;
   Hash* hashTableD;
-  int hashSize;
+  double timeQ[5];
+  double timeD[5];
+  int itemsFoundQ[5];
+  int itemsFoundD[5];
+  int itemsNotFoundD[5];
+  int itemsNotFoundQ[5];
 
   public:
   Executive();
   void Run();
   void PrintMenu();
   void WrongInputTypeCheck(int &num);
-  void InitializeHash(double multiplier);
+  void InitializeHashQ(double multiplier, int index);
+  void InitializeHashD(double multiplier, int index);
+  void SearchHashQ(int index);
+  void SearchHashD(int index);
+  void PrintResultsQ();
+  void PrintResultsD();
 };
 #endif
